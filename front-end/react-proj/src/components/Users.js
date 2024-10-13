@@ -2,9 +2,8 @@ import React from 'react';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 const UserTable = ({ users }) => {
-    const data = users.data
-    const userdata = data.results
-    console.log(data)
+    const data = users
+    console.log("data is :", data)
     return (
       <TableContainer component={Paper}>
         <Table>
@@ -20,7 +19,7 @@ const UserTable = ({ users }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-          {Array.isArray(userdata) && userdata.length > 0 ? (data.map((user, index) => (
+          {Array.isArray(data) && data.length > 0 ? (data.map((user, index) => (
               <TableRow key={user.email}>
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{user.nick_name}</TableCell>

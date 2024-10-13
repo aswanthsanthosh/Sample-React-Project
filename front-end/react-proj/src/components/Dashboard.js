@@ -32,8 +32,8 @@ useEffect(() => {
           } else{
             console.log("2222222")
             const data = await response.json();
-            console.log(data)
-            setUsers(data); // Set the fetched users into state
+            console.log(data.data.results)
+            setUsers(data.data.results); // Set the fetched users into state
             };
         } catch (err) {
           setError(err.message); // Handle errors

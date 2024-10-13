@@ -45,6 +45,11 @@ const Login = ({ onLogin }) => {
 
       console.log("Response received:", response.status);
 
+      if (response.status === 200) {
+        localStorage.setItem("accessToken", response.data.tokens.access);
+        localStorage.setItem("refreshToken", response.data.tokens.refresh);
+        onLogin(response.data);
+      }
       // Check for specific error in response data or invalid status code
       toast.success("Login successful");
       setError(false); // Reset error state on successful login
