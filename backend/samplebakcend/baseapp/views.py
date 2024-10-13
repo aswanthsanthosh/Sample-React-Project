@@ -41,7 +41,7 @@ class LoginView(APIView):
         password = request.data.get('password')
         user = authenticate(request, email=email, password=password)
         if user is not None:
-            if not user.is_active:
+            if user.is_suspended:
                 return Response({'error': 'suspended user'}, status=status.HTTP_400_BAD_REQUEST)
             tokens = get_tokens_for_user(user)
             return Response({

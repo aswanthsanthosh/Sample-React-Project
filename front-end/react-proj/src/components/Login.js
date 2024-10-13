@@ -71,8 +71,10 @@ const Login = ({ onLogin }) => {
           }
       );
       setError(true); // Trigger error state for form
-  } else {
-    toast.error('ログインに失敗しました。もう一度お試しください。',
+  } else if (error.response && error.response.data && error.response.data.error === "suspended user") {
+
+  }else {
+    toast.error('お使いのアカウントは現在アクセスできません。ログインするには担当の管理者までお知らせください。',
       {
         position: "bottom-center",
         autoClose: 3000,
