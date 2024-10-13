@@ -1,8 +1,7 @@
 .App {
-  display: flex; /* Enable flexbox layout */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
   height: 100vh; /* Full height of the viewport */
+  overflow: hidden;
+  position: relative;
 }
 
 .App-logo {
@@ -43,10 +42,9 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: var(--Main-LightBG, #F8F5F0);
+  background: var(--Main-LightBG, #f8f5f0);
   color: #333; /* Text color */
 }
-
 
 /* Splash Screen CSS : */
 
@@ -55,7 +53,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: var(--Main-LightBG, #F8F5F0);
+  background: var(--Main-LightBG, #f8f5f0);
 }
 
 .splash-logo {
@@ -63,26 +61,39 @@ body {
   height: auto; /* Maintain the aspect ratio */
 }
 
+.login {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .login-container {
-  max-width: 300px;
-  margin: 50px auto;
+  max-width: 400px;
+  width: 100%;
   padding: 20px;
   /* background-color: white; White background for login form */
 }
 
+.login-top {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e0e0e0;
+}
+
 .login-image {
-  position: absolute; /* Absolute positioning */
-  top: 20px; /* Adjust this value as needed */
-  bottom: 1000px;
-  left: 30px; /* Adjust this value as needed */
-  width: 150px; 
-  height: 50px; 
-  gap: 0px; 
+  padding-left: 40px;
+  width: 150px;
+  height: 50px;
+  gap: 0px;
   opacity: 0px;
 }
 
 .login-header {
-  margin: 10px 30px 50px; /* Add some vertical spacing */
+  margin-bottom: 40px;
   font-size: 28px; /* Adjust font size as needed */
   font-weight: bold; /* Make the heading bold */
   font-family: Noto Sans JP;
@@ -90,15 +101,13 @@ body {
   line-height: 36px;
   text-align: center;
   border: #333;
-
 }
 
 .forgot-pw {
-  color: inherit; /* Inherit the color from the parent element */
-  text-decoration: none; /* Remove underline */
-  display: block; /* Make the link take up the full width */
-  margin-top: 20px; /* Add some spacing above the link */
-  text-align: center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .forgot-pw form {
@@ -109,44 +118,41 @@ body {
   margin-bottom: 10px;
 }
 
-.forgot-pw p{
+.forgot-pw p {
   font-size: 13px;
-  width: 400px;
+  width: 100%;
   text-align: center;
   margin-top: 0px;
   margin-right: 200px;
   margin-left: 0px;
 }
 
-.pw-description {
-  
+.forgot-pw-link {
+  width: 100%;
+  padding-top: 8px;
+  display: flex;
+  justify-content: center;
 }
-
 
 label {
   display: block;
   margin-bottom: 25px;
   text-align: left;
-  width: 400px;
+  width: 100%;
   height: 9px;
   gap: 0px;
   opacity: 0px;
-
 }
 
 input {
-  /* width: 100%; */
-  padding-left: 25px;
   font-size: 15px;
   margin-bottom: 21px;
   border: 1px solid #ccc;
-  border-radius: 3px;
-  width: 400px;
+  width: 100%;
   height: 44px;
   gap: 0px;
   border-radius: 8px 8px 8px 8px;
   opacity: 0px;
-
 }
 
 .input-normal {
@@ -160,32 +166,30 @@ input {
 
 /* Focused input style */
 .input-focused {
-  border: 1px #FF9500; /* Change the color to whatever you want on focus */
+  border: 1px #ff9500; /* Change the color to whatever you want on focus */
 }
 
 button {
   padding: 10px 15px;
-  background: var(--Main-Primary, #FF9500);
+  background: var(--Main-Primary, #ff9500);
   color: white;
   border: none;
   cursor: pointer;
   text-align: center;
 
-  width: 400px;
+  width: 100%;
   height: 48px;
   gap: 16px;
   border-radius: 100px 100px 100px 100px;
   /* opacity: 0.5px; */
-
-
 }
 
 button:active {
-  opacity: 50%; 
+  opacity: 50%;
 }
 
 button:hover {
-  background: var(--Main-Primary, #FF9500); /* Keep the original color */
+  background: var(--Main-Primary, #ff9500); /* Keep the original color */
   color: white; /* Keep text white */
   text-decoration: none; /* Ensure no underline or default link styles */
 }
@@ -245,9 +249,6 @@ button:hover {
   left: 350px;
 }
 
-
-
-
 .sidebar {
   width: 208px;
   height: 100vh;
@@ -288,11 +289,9 @@ button:hover {
 }
 
 .sidebar ul li a:hover {
-  color: #FF9500;
-  background: #FFF4E6;
-
+  color: #ff9500;
+  background: #fff4e6;
 }
-
 
 .search-bar {
   width: 300px;
@@ -308,16 +307,4 @@ button:hover {
   border-radius: 4px;
   border: 1px solid #ccc;
   box-sizing: border-box; /* Include padding and border in element's total width */
-}
-
-.custom-horizontal{
-  width: 100vw;
-  margin-top: 10px;
-
-  position: absolute;
-  top: 70px; 
-  bottom: 1000px;
-  opacity: 20%;
-
-
 }

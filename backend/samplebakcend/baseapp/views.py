@@ -9,6 +9,7 @@ from .models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from .filters import UserFilter 
 from django_filters.rest_framework import DjangoFilterBackend
+from .pagination import CustomPagination
 
 # Create your views here.
 
@@ -18,6 +19,7 @@ class UserListView(ListAPIView):
     permission_classes = [IsAuthenticated ]
     filter_backends = [DjangoFilterBackend]
     filterset_class = UserFilter
+    pagination_class = CustomPagination
     
     def get_queryset(self):
         return User.objects.filter(is_staff=False)
@@ -25,8 +27,10 @@ class UserListView(ListAPIView):
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         queryset = self.filter_queryset(queryset)
-        serializer = self.get_serializer(queryset, many=True)
-        return Response({'data': serializer.data}, status=status.HTTP_200_OK)
+        page = self.paginate_queryset(queryset)
+        serializer = self.get_serializer(page, many=True)
+        data = self.get_paginated_response(serializer.data).data
+        return Response({'data': data}, status=status.HTTP_200_OK)
     
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)

@@ -3,6 +3,8 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 
 const UserTable = ({ users }) => {
     const data = users.data
+    const userdata = data.results
+    console.log(data)
     return (
       <TableContainer component={Paper}>
         <Table>
@@ -18,7 +20,7 @@ const UserTable = ({ users }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-          {Array.isArray(data) && data.length > 0 ? (data.map((user, index) => (
+          {Array.isArray(userdata) && userdata.length > 0 ? (data.map((user, index) => (
               <TableRow key={user.email}>
                 <TableCell>{index + 1}</TableCell>
                 <TableCell>{user.nick_name}</TableCell>
