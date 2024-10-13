@@ -177,7 +177,7 @@ const Login = ({ onLogin }) => {
             required
           />
           <button type="submit">ログイン</button>
-          <a className="forgot-pw" href="forgot-pw">
+          <a className="forgot-pw-link" href="forgot-pw">
             パスワードをお忘れの場合
           </a>
         </form>
