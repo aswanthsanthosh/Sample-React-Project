@@ -72,9 +72,25 @@ const Login = ({ onLogin }) => {
       );
       setError(true); // Trigger error state for form
   } else if (error.response && error.response.data && error.response.data.error === "suspended user") {
+    toast.error('お使いのアカウントは現在アクセスできません。ログインするには担当の管理者までお知らせください。',
+      {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: false,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+        style: { width: '450px', height: '55px', borderRadius: '25' },
+        closeButton: false, 
+        }
+    );
+    setError(true);
 
   }else {
-    toast.error('お使いのアカウントは現在アクセスできません。ログインするには担当の管理者までお知らせください。',
+    toast.error('ログインに失敗しました。もう一度お試しください。',
       {
         position: "bottom-center",
         autoClose: 3000,
