@@ -8,6 +8,7 @@ __Clone the repository__
 
 ```
    git clone https://github.com/aswanthsanthosh/Sample-React-Project.git
+   cd Sample-React-Project/
    ```
 __[ for backend : ]__
   ```
