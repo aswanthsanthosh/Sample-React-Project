@@ -45,6 +45,7 @@ come back to the Sample-React-Project directory
 
 ```
    cd front-end/react-proj/
+   npm install
   
    ```
 __Run Development Server__
