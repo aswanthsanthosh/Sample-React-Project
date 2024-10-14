@@ -5,7 +5,7 @@ import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 
-const Login = ({ onLogin }) => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null); // State for error messages
@@ -48,7 +48,6 @@ const Login = ({ onLogin }) => {
       if (response.status === 200) {
         localStorage.setItem("accessToken", response.data.tokens.access);
         localStorage.setItem("refreshToken", response.data.tokens.refresh);
-        onLogin(response.data);
       }
       // Check for specific error in response data or invalid status code
       toast.success("Login successful");
@@ -56,7 +55,6 @@ const Login = ({ onLogin }) => {
       navigate("/dashboard"); // Navigate to dashboard
     } catch (error) {
       // console.error('Login failed:', error.response.data.error);
-
       // Show error message in case of network or other exceptions
       if (
         error.response &&
@@ -81,25 +79,9 @@ const Login = ({ onLogin }) => {
         error.response &&
         error.response.data &&
         error.response.data.error === "suspended user"
-      ) {toast.error('お使いのアカウントは現在アクセスできません。ログインするには担当の管理者までお知らせください。',
-          {
-            position: "bottom-center",
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: false,
-            pauseOnHover: false,
-            draggable: false,
-            progress: undefined,
-            theme: "light",
-            transition: Bounce,
-            style: { width: '450px', height: '55px', borderRadius: '25' },
-            closeButton: false, 
-            });
-        setError(true);
-      
-      } else {
+      ) {
         toast.error(
-          'ログインに失敗しました。もう一度お試しください。',
+          "お使いのアカウントは現在アクセスできません。ログインするには担当の管理者までお知らせください。",
           {
             position: "bottom-center",
             autoClose: 3000,
@@ -114,6 +96,21 @@ const Login = ({ onLogin }) => {
             closeButton: false,
           }
         );
+        setError(true);
+      } else {
+        toast.error("ログインに失敗しました。もう一度お試しください。", {
+          position: "bottom-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: false,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "light",
+          transition: Bounce,
+          style: { width: "450px", height: "55px", borderRadius: "25" },
+          closeButton: false,
+        });
         setError(false); // Trigger error state for form
       }
     }
@@ -147,8 +144,8 @@ const Login = ({ onLogin }) => {
               error
                 ? "input-error"
                 : focusedField === "email"
-                ? "input-focused"
-                : "input-normal"
+                  ? "input-focused"
+                  : "input-normal"
             }
             //   style={{
             //     borderColor: error ? 'red' : '', // Conditionally apply red border
@@ -172,8 +169,8 @@ const Login = ({ onLogin }) => {
               error
                 ? "input-error"
                 : focusedField === "password"
-                ? "input-focused"
-                : "input-normal"
+                  ? "input-focused"
+                  : "input-normal"
             }
             //   style={{
             //     borderColor: error ? 'red' : '', // Conditionally apply red border

@@ -1,16 +1,16 @@
-import React from 'react';
-import { TextField } from '@mui/material';
+import React from "react";
+import { InputAdornment, TextField } from "@mui/material";
+import { FiSearch } from "react-icons/fi";
 
 const SearchBar = ({ value, onChange }) => {
   return (
-    <div className='search-bar'>
-    <TextField
-      label="ニックネーム / メールアドレスで検索"
-      variant="outlined"
-      value={value}
-      onChange={(e) => onChange(e.target.value)}
-      fullWidth
-    />
+    <div className="search-bar">
+      <input
+        className="textfield"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder="ニックネーム / メールアドレスで検索"
+      />
     </div>
   );
 };

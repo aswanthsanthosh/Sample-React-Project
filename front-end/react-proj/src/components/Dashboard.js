@@ -1,68 +1,82 @@
-import React, { useState, useEffect } from 'react';
-import UserTable from './Users';
-import PaginationComponent from './Pagination';
-import SearchBar from './SearchBar';
-import Sidebar from './SideBar';
+import React, { useState, useEffect } from "react";
+import UserTable from "./Users";
+import PaginationComponent from "./Pagination";
+import SearchBar from "./SearchBar";
+import Sidebar from "./SideBar";
 import { FaRegUserCircle } from "react-icons/fa";
-
+import Layout from "./layout";
+import { BsArrowDown, BsArrowUp } from "react-icons/bs";
 
 const Dashboard = () => {
-  const [users, setUsers] = useState([]);
-  const [page, setPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-    
-  
-useEffect(() => {
-    const fetchData = async () => {
-      const token = localStorage.getItem('accessToken');
-        try {
-          const response = await fetch('http://127.0.0.1:8000/users/', 
-            {
-              method: 'GET',
-              headers: {
-                  'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${token}`  // Add the Bearer token here
-              }
-              }); // Replace with your API endpoint
-          if (!response.ok) {
-            console.log("111111")
-            throw new Error('Error fetching data');
-          } else{
-            console.log("2222222")
-            const data = await response.json();
-            console.log(data.data.results)
-            setUsers(data.data.results); // Set the fetched users into state
-            };
-        } catch (err) {
-          setError(err.message); // Handle errors
-        } finally {
-          setLoading(false); // Stop loading when data is fetched or an error occurs
-        }
-      };
-  
-      fetchData();
-    }, []);
 
-  return (
-    <div className='dashboard-container'>
-        <div className='sidebar'>
-            <Sidebar />
+  return <Layout>
+    <div className="dashboard-toprow">
+
+      <div className="card">
+        <div className="card-header">
+          <h4>ユーザー登録数累計</h4>
+          <span>2024年2月1日 - 2024年2月5日</span>
         </div>
-        <div className='dash-header'>
-            <h1>Dashboard Title</h1>
-            <FaRegUserCircle className='img'/>
-        </div>
-        <div className='dash-content'>
-        <h2 className='dash-user-heading'>登録ユーザー一覧</h2>
-          <div className='dash-search'>
-            <SearchBar />
+        <div className="card-footer">
+          <div className="card-footer-top">
+            <h5><span>450</span>人</h5>
           </div>
-            <UserTable users={users}/>
+          <div className="card-footer-bottom">
+            <span>400人 (前月時点の累計）</span>
+            <div className="badge up"><BsArrowUp />12.5%</div>
+          </div>
+        </div>        
+      </div>
+
+      <div className="card">
+        <div className="card-header">
+          <h4>アクティブユーザー</h4>
+          <span>2024年2月1日 - 2024年2月5日</span>
         </div>
-    </div>
-  );
+        <div className="card-footer">
+          <div className="card-footer-top">
+            <h5><span>50</span>人 / 今月</h5>
+          </div>
+          <div className="card-footer-bottom">
+            <span>12人 (前月時点）</span>
+            <div className="badge up"><BsArrowUp />316.6%</div>
+          </div>
+        </div>        
+      </div>
+
+      <div className="card">
+        <div className="card-header">
+          <h4>定着率</h4>
+          <span>2024年2月1日 - 2024年2月5日</span>
+        </div>
+        <div className="card-footer">
+          <div className="card-footer-top">
+            <h5><span>10</span>% / 前月</h5>
+          </div>
+          <div className="card-footer-bottom">
+            <span>12% (前々月）</span>
+            <div className="badge down"><BsArrowDown />16.6%</div>
+          </div>
+        </div>        
+      </div>
+
+      <div className="card">
+        <div className="card-header">
+          <h4>平均検索回数</h4>
+          <span>2024年2月1日 - 2024年2月5日</span>
+        </div>
+        <div className="card-footer">
+          <div className="card-footer-top">
+            <h5><span>4</span>回 / 今月</h5>
+          </div>
+          <div className="card-footer-bottom">
+            <span>2回 (前月の今日時点）</span>
+            <div className="badge up"><BsArrowUp />100%</div>
+          </div>
+        </div>        
+      </div>
+
+    </div></Layout>
 };
 
 export default Dashboard;
