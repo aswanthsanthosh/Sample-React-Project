@@ -54,8 +54,8 @@ __Run Development Server__
 
 __for testing :__
 
-credential for login - email - admin@gmail.com : password - 123
-credential for suspended user - email - jack@gmail.com : password - 123
+- credential for login - email - admin@gmail.com : password - 123
+- credential for suspended user - email - jack@gmail.com : password - 123
 
 
 
