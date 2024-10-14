@@ -10,6 +10,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from .filters import UserFilter 
 from django_filters.rest_framework import DjangoFilterBackend
 from .pagination import CustomPagination
+import re
 
 # Create your views here.
 
@@ -22,7 +23,7 @@ class UserListView(ListAPIView):
     pagination_class = CustomPagination
     
     def get_queryset(self):
-        return User.objects.filter(is_staff=False)
+        return User.objects.filter(is_staff=False).order_by('-registation_date')
     
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
@@ -60,6 +61,30 @@ class LogoutView(APIView):
     def post(self, request):
         logout(request)
         return Response({'message': 'Logged out successfully'}, status=status.HTTP_200_OK)
+    
+    
+class EmailVerificationView(APIView):
+    def post(self, request):
+        email = request.data.get('email')
+        email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+        if re.match(email_regex, email) is None:
+            return Response({'message': 'invalid mail id'}, status=status.HTTP_400_BAD_REQUEST)
+        if not User.objects.filter(email=email).exists():
+            return Response({'message': 'mail id not registered'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'message': 'success'}, status=status.HTTP_200_OK)
+    
+class ChangePassword(APIView):
+    def post(self, request):
+        email = request.data.get('email')
+        new_password = request.data.get('password')
+        try:
+            user = User.objects.get(email=email)
+            user.set_password(new_password)
+        except:
+            return Response({'message': 'something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'message': 'success'}, status=status.HTTP_200_OK)
+        
+        
     
 
     
